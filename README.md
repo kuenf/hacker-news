@@ -44,3 +44,5 @@ To run the tests for the app
 - Replace the use of Moment.js to date-fn.js for mroe functional approach
 
 - Stronger typing e.g. Flows, Typscript
+
+- Display load time, loading status
