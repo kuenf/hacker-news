@@ -1,6 +1,6 @@
-import React from 'react';
-import SearchResult from './SearchResult';
-import Header from './Header';
+import React from 'react'
+import SearchResult from './SearchResult'
+import Header from './Header'
 
 const App = () => {
     return (
@@ -8,7 +8,7 @@ const App = () => {
         <Header />
         <div className="ui hidden divider"></div>
         <SearchResult />
-    </div>);
-};
+    </div>)
+}
 
-export default App;
+export default App

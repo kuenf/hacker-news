@@ -1,48 +1,44 @@
-import _ from 'lodash';
-import React from 'react';
-import { connect } from 'react-redux';
-import ReactPaginate from 'react-paginate';
-import Moment from 'react-moment';
-import { fetchSearchResult } from '../actions';
-import './pagination.css';
+import React from 'react'
+import { connect } from 'react-redux'
+import ReactPaginate from 'react-paginate'
+import PropTypes from 'prop-types'
+import { fetchSearchResult } from '../actions'
+import SearchResultItem from './SearchResultItem'
+import '../pagination.css'
 
 export class SearchResult extends React.Component {
     componentDidMount() {
-        this.props.fetchSearchResult();
+        this.props.fetchSearchResult()
     }
 
     renderList() {
-		const { results } = this.props;
-		if (results.hits !== undefined) {
+		const { results } = this.props
+
+		if (results.hits !== undefined && results.hits.length > 0) {
 			return results.hits.map( result => {
-				const {objectID, title, story_title, points, author, created_at, num_comments, url} = result;
-				return (
-					<div className="item" key={objectID}>
-						<div className="content">
-							<div className="header">{_.isEmpty(title) ? story_title : title}</div>
-							<div className="extra">
-								<div className="ui label">{points === null ? 0 : points} points</div>
-								<div className="ui label">{author}</div>
-								<div className="ui label"><Moment fromNow>{created_at}</Moment></div>								
-								<div className="ui label">{ num_comments === null ? 0 : num_comments} comments</div>
-								<div className="ui label"><a href={url} target="_blank" rel="noopener noreferrer"><i className="linkify icon"></i></a></div>
-							</div>
-						</div>
-					</div>
-				);
-			});
+				const {objectID} = result
+				return <SearchResultItem {...result} key={objectID} />
+			})
 		}
     }
 
 	handlePageClick = ({selected}) => {
-		this.props.fetchSearchResult(this.props.results.query, selected);
+		this.props.fetchSearchResult(this.props.results.query, selected)
 	};
 
     render() {
-		const { results } = this.props;
+		const { results } = this.props
 	
-		if (results.length === 0) {
+		if (results === null) {
 			return <div data-test="empty" className="ui container"></div>
+		}
+
+		if (results.hits.length === 0) {
+			return (
+				<div data-test="no-seach-result" className="ui container center aligned">
+					No search result for this keyword <b>{results.query}</b>
+				</div>
+			)
 		}
 
 		return (			
@@ -67,15 +63,19 @@ export class SearchResult extends React.Component {
 					pageClassName="paginationPage"
 				/>
 			</div>
-		);
+		)
     }
+}
+
+SearchResult.propTypes = {
+	results: PropTypes.object,
+	fetchSearchResult: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
 	return {
-		results: state.searchResult,
-		isLoading: false
-	};
+		results: state.searchResult
+	}
 }
 
-export default connect(mapStateToProps, { fetchSearchResult })(SearchResult);
+export default connect(mapStateToProps, { fetchSearchResult })(SearchResult)

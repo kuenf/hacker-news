@@ -1,5 +1,5 @@
-import React from 'react';
-import SearchBar from './SearchBar';
+import React from 'react'
+import SearchBar from './SearchBar'
 
 const Header = () => {
     return (
@@ -17,7 +17,7 @@ const Header = () => {
                 <SearchBar />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

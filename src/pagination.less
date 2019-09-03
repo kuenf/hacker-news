@@ -1,0 +1,94 @@
+@paginate-page-color: #9d9d9d;
+@paginate-highlight-color: #ffb290;
+@paginate-active-color: #FF742B;
+
+.paginationContainer {
+    display: flex;
+}
+
+.paginationPage {
+	margin-right: 5px;
+    border: 1px solid @paginate-page-color;
+    outline: none;
+    color: @paginate-page-color;
+    padding: 5px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+	font-size: 0.7rem;
+	
+	&:hover {
+		border: 1px solid @paginate-highlight-color;
+		color: @paginate-highlight-color;
+	}
+
+	a {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: inline-block;
+		text-align: center;
+		// line-height: 25px;
+		outline: none;
+	}
+	
+  }
+
+.paginationBreak {
+	margin: 0 5px;
+	cursor: pointer;
+    
+	a {
+		outline: none;
+	}
+}
+
+.paginationPrevious, .paginationNext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid @paginate-page-color;
+    outline: none;
+    padding: 5px;
+    color: @paginate-page-color;
+    height: 22px;
+    line-height: 22px;
+	cursor: pointer;
+	font-size: 0.8rem;
+
+	&:hover {
+		border: 1px solid @paginate-highlight-color;
+		color: @paginate-highlight-color;
+    }
+    
+	a {
+		padding: 6px 8px;
+		outline: none;
+	}    
+}
+
+.paginationPrevious {
+	margin-right: 10px;
+}
+  
+.paginationNext {
+	margin-left: 10px;
+}
+  
+li.paginationActive {
+	border: 1px solid @paginate-active-color;
+	color: @paginate-active-color;
+	padding: 5px;
+	font-weight: bold;
+}
+
+ul.paginationContainer{
+	list-style-type: none;
+}
+
+.paginationContainer li {
+	padding: 0 10px;
+	cursor: pointer;
+}
